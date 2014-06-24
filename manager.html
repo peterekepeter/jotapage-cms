@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html style="width:100%;height:100%">
+<head>
+    <title>nanoCMS - manager</title>
+    <link rel="shortcut icon" href="favicon.png">
+    <script src='jquery-2.1.0.min.js'></script>
+    <script src='devcms.js'></script>
+    <style>
+        body{
+            font-family: 'Verdana',sans-serif;
+        }
+        .sidebar{
+            background-color:#333;
+            color:#eee;
+            float:left;
+            height:100%;
+            width:8%;
+
+        }
+        .sidebarList{
+            padding:0;
+            margin:0;
+            list-style-type:none;
+        }
+        .sidebarItem{
+            font-family: 'Verdana',sans-serif;
+            font-weight: lighter;
+            font-size: 16px;
+            padding:10px;
+            padding-left: 15px;
+            padding-right:15px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            border-right:2px solid #333;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+
+        }
+		.sidebarItemUnselected:hover{
+			cursor: default;
+			text-shadow: 0px 0px 2px #fff;
+
+            background-color:#383838;
+		}
+        .sidebarItemSelected{
+            border-right: 2px solid #fff;
+
+            color:#ccc;
+            background-color:#2c2c2c;
+        }
+        table{
+            border-collapse: collapse;
+            width:100%;
+        }
+        td{
+            border: 1px solid #ccc;
+            padding:2px;
+        }
+        button{
+            border:1px solid #ccc;
+        }
+        input{
+            border:1px solid #ccc;
+        }
+        .noborder{
+            border:0px none;
+            background-color: inherit;
+        }
+        .rightPanel{
+            overflow:scroll;
+            height:100%;
+            width:92%;
+        }
+        .content{
+            width:95%;
+            margin:auto;
+        }
+        tr:first-child{
+            background-color: #f0f0f0;
+        }
+        tr:nth-child(2n+3){
+            background-color: #f8f8f8;
+        }
+        tr:nth-child(2n+2){
+            background-color: #fcfcfc;
+        }
+        pre{
+            background-color: #f8f8f8;
+            border:1px solid #ccc;
+            width:100%;
+        }
+        blockquote{
+            border-left:4px solid #ccc;
+            padding-left: 40px;
+            margin: 0px;
+        }
+        hr{
+            border:none;
+            border-top:1px solid #ccc;
+        }
+        li{
+            text-decoration-color: #ccc;
+        }
+
+        h1, h2, h3, h4, h5, h6{
+            color: #444;
+        }
+        h2{
+            border-bottom: 1px solid #f0f0f0;
+        }
+        a, a:hover, a:visited, a:active{
+            text-decoration: none;
+            color : #04a;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            $(".sidebarItem").click(function()
+            {
+                $(".sidebarItem").attr('class','sidebarItem sidebarItemUnselected')
+                $(this).attr('class',"sidebarItem sidebarItemSelected");
+            });
+            $(".content").hide().fadeIn(1000);
+        });
+    </script>
+</head>
+<body style="width:100%;height:100%;padding:0;margin:0">
+    <div class='sidebar' style='display:table-cell;display: inline-block'>
+        <ul class='sidebarList'>
+            <li class='sidebarItem sidebarItemUnselected' onclick='menuArticles()'>Articles</li>
+            <li class='sidebarItem sidebarItemUnselected' onclick='menuUsers()'>Users</li>
+            <li class='sidebarItem sidebarItemUnselected' onclick='menuFiles()'>Files</li>
+            <li class='sidebarItem sidebarItemUnselected' onclick='menuAccount()'>Account</li>
+            <li class='sidebarItem sidebarItemUnselected' onclick='menuLogout()'>Logout</li>
+        </ul>
+    </div>
+    <div class='rightPanel'>
+        <div class='content'>
+            <h2>Welcome . . . </h2>
+            <span style="text-align: right;"><p>to the <strong>Jot-a-Page</strong> the page-o-matic CMS manager.</p>
+            <p>Made by Eke 'Pelyho' Peter.</p>
+            <p>Icons made by
+                <strong><span style="color:#FF0B5B">fam</span><span style="color:#0BCEFF">fam</span><span style="color:#A0DC11">fam</span></strong>
+            </p> </span>
+        </div>
+    </div>
+</body>
+</html>

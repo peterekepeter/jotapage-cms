@@ -1,0 +1,123 @@
+<head>
+    <link rel="shortcut icon" href="favicon.png">
+	<style>
+		.editorButton{
+            padding:0;
+        }
+        .editorPreview{
+            border:1px solid #ccc;
+            background-color: #fff;
+            overflow-y: scroll;
+            resize:both;
+            font-family: sans-serif;
+            padding:20px;
+        }
+        .editorContainer{
+            width: 100%;
+        }
+        .editor{
+            width: 40%;
+        }
+        .editorRightPanel{
+            width: 60%;
+        }
+        .editorTextArea{
+            border:1px solid #ccc;
+            width: 98%;
+            height: 800px;
+            font-family: monospace;
+        }
+        .editorToolbar{
+            word-spacing: -4px;
+            line-height: 24px;;
+        }
+        .editorToolbarButton{
+            padding:1px;
+        }
+	</style>
+    <script src="jquery-2.1.0.min.js"></script>
+    <script src="devcms.js"></script>
+    <script>
+        $(document).ready(function()
+        {
+            //alert('lol');
+            editorPreview();
+            enableTab('editorTextArea');
+        });
+        function editorDoLivePreview()
+        {
+            var node = $('.editorPreview');
+            node.html(markdownToHTML($('.editorTextArea').val()));
+        }
+        function editorLatentPreview()
+        {
+            editorDoLivePreview();
+        }
+        function editorPreview()
+        {
+            editorDoLivePreview();
+        }
+
+        function enableTab(e) { //http://jsfiddle.net/2wAzx/13/
+
+            if (e.keyCode === 9) {
+                // get caret position/selection
+                var val = this.value,
+                        start = this.selectionStart,
+                        end = this.selectionEnd;
+
+                // set textarea value to: text before caret + tab + text after caret
+                this.value = val.substring(0, start) + '\t' + val.substring(end);
+
+                // put caret at right position again
+                this.selectionStart = this.selectionEnd = start + 1;
+
+                // prevent the focus lose
+                return false;
+            }
+        }
+    </script>
+</head>
+<body style="padding:0;margin:0;">
+    <div class="articleCommand" style="margin-bottom: 20px;">
+        <h2>Edit Article</h2>
+        <input type="text" class="editorArticleTitle" style="width:300px">
+        <button class="editorButton save">Save</button>
+        <button class="editorButton saveAndExit">Save and Exit</button>
+        <button class="editorButton cancel">Cancel</button>
+    </div>
+    <div class="editorContainer" >
+        <div class="editor" style="float:left">
+            <div class="editorToolbar" style="margin-bottom:10px">
+                <button class="editorToolbarButton" onclick="editorFormat($('textarea')[0],'**','Bold','** ')"><img src="icons/text_bold.png"></button>
+                <button class="editorToolbarButton" onclick="editorFormat($('textarea')[0],'*','Italic','* ')"><img src="icons/text_italic.png"></button>
+                <button class="editorToolbarButton" onclick="editorFormat($('textarea')[0],'#','Heading 1','# ')"><img src="icons/text_heading_1.png"></button>
+                <button class="editorToolbarButton" onclick="editorFormat($('textarea')[0],'##','Heading 2','## ')"><img src="icons/text_heading_2.png"></button>
+                <button class="editorToolbarButton" onclick="editorFormat($('textarea')[0],'###','Heading 3','### ','')"><img src="icons/text_heading_3.png"></button>
+                <button class="editorToolbarButton" onclick="editorFormat($('textarea')[0],'####','Heading 4','#### ','')"><img src="icons/text_heading_4.png"></button>
+                <button class="editorToolbarButton" onclick="editorFormat($('textarea')[0],'#####','Heading 5','##### ','')"><img src="icons/text_heading_5.png"></button>
+                <button class="editorToolbarButton" onclick="editorFormat($('textarea')[0],'######','Heading 6','###### ')"><img src="icons/text_heading_6.png"></button>
+                <button class="editorToolbarButton" onclick="editorFormat($('textarea')[0],'- ','List Item','\n')"><img src="icons/text_list_bullets.png"></button>
+                <button class="editorToolbarButton" onclick="editorFormat($('textarea')[0],'1. ','List Item','\n')"><img src="icons/text_list_numbers.png"></button>
+                <button class="editorToolbarButton" onclick="editorFormat($('textarea')[0],'------','','\n')"><img src="icons/text_horizontalrule.png"></button>
+                <button class="editorToolbarButton" onclick="editorFormat($('textarea')[0],'![](','picture.jpg',') ')"><img src="icons/image.png"></button>
+                <button class="editorToolbarButton" onclick="editorFormat($('textarea')[0],'[link](','http://www.google.com',') ')"><img src="icons/link.png"></button>
+                <button class="editorToolbarButton" onclick="editorFormat($('textarea')[0],'    ','int main()','\n')"><img src="icons/script_code.png"></button>
+                <button class="editorToolbarButton" onclick="editorFormat($('textarea')[0],'![](','music.mp3',') ')"><img src="icons/sound.png"></button>
+                <button class="editorToolbarButton" onclick="editorFormat($('textarea')[0],'![](','video.mp4',') ')"><img src="icons/film.png"></button>
+            </div>
+            <div class="editorBody">
+                <textarea class="editorTextArea" id="editorTextArea"
+                          onchange="editorPreview()"
+                          oninput="editorLatentPreview()"
+                          onkeydown="enableTab(event)">
+                </textarea>
+            </div>
+        </div>
+        <div class='editorRightPanel' style="float:left;">
+            <img src="icons/bullet_red.png">Live Preview
+            <div class="editorPreview">
+            </div>
+        </div>
+    </div>
+</body>
